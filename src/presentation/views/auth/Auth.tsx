@@ -1,8 +1,6 @@
-
 import React, { ReactElement, useEffect, useState } from 'react'
 
 import { IAuthViewModel } from '../../viewModels/auth/AuthViewModel'
-import { IBaseView } from '../BaseView'
 import './auth.css'
 
 export interface AuthComponentProps {
@@ -11,7 +9,7 @@ export interface AuthComponentProps {
 
 export interface AuthComponentState {
   emailQuery: string
-  passwordQuery: string;
+  passwordQuery: string
   isSignInButtonVisible: boolean
   isSignOutButtonVisible: boolean
 
@@ -21,7 +19,6 @@ export interface AuthComponentState {
   authStatus: string
   isAuthStatusPositive: boolean
 }
-
 
 export default function Auth({ authViewModel }: AuthComponentProps): ReactElement {
   const [authModel, setAuthModel] = useState({ ...authViewModel.authState })
@@ -38,14 +35,12 @@ export default function Auth({ authViewModel }: AuthComponentProps): ReactElemen
     }
   }, [authViewModel])
 
-
-
   return (
     <div className="row flex-grow-1 d-flex justify-content-center align-items-center">
       <div className="auth-container col bg-white border rounded-lg py-4 px-5">
         <div className="row mt-2 mb-4">
           Status:&nbsp;
-        <span className={`${authModel.isAuthStatusPositive ? 'text-success' : 'text-danger'}`}>
+          <span className={`${authModel.isAuthStatusPositive ? 'text-success' : 'text-danger'}`}>
             {authModel.authStatus}
           </span>
         </div>
@@ -55,7 +50,7 @@ export default function Auth({ authViewModel }: AuthComponentProps): ReactElemen
             type="text"
             placeholder="user@email.com"
             onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-              authViewModel.onEmailQueryChanged(e.currentTarget.value);
+              authViewModel.onEmailQueryChanged(e.currentTarget.value)
             }}
             value={authModel.emailQuery}
             className="form-control"
@@ -66,7 +61,7 @@ export default function Auth({ authViewModel }: AuthComponentProps): ReactElemen
             type="password"
             placeholder="password"
             onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-              authViewModel.onPasswordQueryChanged(e.currentTarget.value);
+              authViewModel.onPasswordQueryChanged(e.currentTarget.value)
             }}
             value={authModel.passwordQuery}
             className="form-control"
@@ -79,25 +74,17 @@ export default function Auth({ authViewModel }: AuthComponentProps): ReactElemen
 
         {authModel.isSignInButtonVisible && (
           <div className="row mt-4">
-            <button
-              type="button"
-              className="col btn btn-primary"
-              onClick={(): void => authViewModel.onClickSignIn()}
-            >
+            <button type="button" className="col btn btn-primary" onClick={(): void => authViewModel.onClickSignIn()}>
               Sign in
-          </button>
+            </button>
           </div>
         )}
 
         {authModel.isSignOutButtonVisible && (
           <div className="row mt-4">
-            <button
-              type="button"
-              className="col btn btn-primary"
-              onClick={(): void => authViewModel.onClickSignOut()}
-            >
+            <button type="button" className="col btn btn-primary" onClick={(): void => authViewModel.onClickSignOut()}>
               Sign out
-          </button>
+            </button>
           </div>
         )}
       </div>

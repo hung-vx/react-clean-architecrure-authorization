@@ -1,5 +1,5 @@
-import AuthHolder from "../../entities/auth/models/AuthHolder";
-import IAuthRepository from "../../repositories/auth/AuthRepository";
+import AuthHolder from '../../entities/auth/models/AuthHolder'
+import IAuthRepository from '../../repositories/auth/AuthRepository'
 
 export default class LoginUseCase {
   private authRepository: IAuthRepository
