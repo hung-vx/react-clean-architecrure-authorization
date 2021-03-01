@@ -1,41 +1,16 @@
-import AuthHolder from '../../../domain/entities/auth/models/AuthHolder';
-import LoginUseCase from '../../../domain/interactors/auth/LoginUseCase';
-import FormValidator from '../../util/FormValidator';
-import { IBaseView } from './../../views/BaseView';
-import { IAuthDataStateViewModel, IAuthViewModel } from "./AuthViewModel"
-
-
-export class AuthDataSetViewModelIml implements IAuthDataStateViewModel{
-  emailQuery: string
-  passwordQuery: string
-  isSignInButtonVisible: boolean
-  isSignOutButtonVisible: boolean
-
-  isShowError: boolean
-  errorMessage: string
-
-  authStatus: string
-  isAuthStatusPositive: boolean
-
-  public constructor() {
-    this.emailQuery = ''
-    this.passwordQuery = ''
-    this.isSignInButtonVisible = true
-    this.isSignOutButtonVisible = false
-
-    this.isShowError = false
-    this.errorMessage = ''
-
-    this.authStatus = 'is not authorized'
-    this.isAuthStatusPositive = false
-  }
-}
+import AuthHolder from '../../../domain/entities/auth/models/AuthHolder'
+import LoginUseCase from '../../../domain/interactors/auth/LoginUseCase'
+import FormValidator from '../../util/FormValidator'
+import { IBaseView } from '../../views/BaseView'
+import { IAuthDataStateViewModel, IAuthViewModel, AuthDataSetViewModelIml } from './AuthViewModel'
 
 export class AuthViewModelImpl implements IAuthViewModel {
   public authState: IAuthDataStateViewModel
 
   private baseView?: IBaseView
+
   private loginUseCase: LoginUseCase
+
   private authHolder: AuthHolder
 
   public constructor(loginUseCase: LoginUseCase, authHolder: AuthHolder) {
@@ -81,7 +56,6 @@ export class AuthViewModelImpl implements IAuthViewModel {
     this.notifyViewAboutChanges()
   }
 
-
   public onClickSignIn = async (): Promise<void> => {
     if (!this.validateLoginForm()) {
       this.notifyViewAboutChanges()
@@ -89,7 +63,7 @@ export class AuthViewModelImpl implements IAuthViewModel {
     }
 
     try {
-      await this.loginUseCase.loginUser(this.authState.emailQuery, this.authState.passwordQuery);
+      await this.loginUseCase.loginUser(this.authState.emailQuery, this.authState.passwordQuery)
       this.authState.isShowError = false
       this.authState.errorMessage = ''
     } catch (e) {

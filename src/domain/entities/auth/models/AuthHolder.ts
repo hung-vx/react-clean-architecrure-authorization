@@ -1,5 +1,4 @@
-import IAuthListener from "./AuthListener";
-
+import IAuthListener from './AuthListener'
 
 export default class AuthHolder {
   private authListeners: IAuthListener[]
