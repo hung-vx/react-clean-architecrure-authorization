@@ -15,7 +15,6 @@ function App(): JSX.Element {
   const loginUseCase = new LoginUseCase(authRepository, authHolder)
   // view layer
   const authViewModel = new AuthViewModelImpl(loginUseCase, authHolder)
-  console.log('app')
   return (
     <div className="app-container d-flex container-fluid">
       <Auth authViewModel={authViewModel} />
